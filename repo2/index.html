@@ -2,8 +2,10 @@
 
 <head>
     <style>
-        * {
-            box-sizing: border-box;
+        /* Style the body */
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
         }
 
         /* Style the header */
@@ -13,82 +15,45 @@
             text-align: center;
         }
 
-        /* Create two columns/boxes that floats next to each other */
-        .column {
-            float: left;
-            width: 50%;
-            padding: 10px;
-        }
+        /* Style the background image */
+        .bg-image {
+            /* The image used */
+            background-image: url("66034631-480px.jpg");
 
-        /* Clear floats after the columns */
-        .row:after {
-            content: "";
-            display: table;
-            clear: both;
-        }
-
-        /* Style the sidebar (left column) */
-        .sidebar {
-            background-color: #f1f1f1;
-            padding: 0;
-            width: 0;
-            /* Initially 0 width */
-            position: fixed;
-            /* Fixed Sidebar (stay in place on scroll) */
+            /* Full height */
             height: 100%;
-            /* Full-height */
-            overflow-x: hidden;
-            /* Disable horizontal scroll */
-            transition: 0.5s;
-            /* 0.5 second transition effect to slide in the sidebar */
+
+            /* Center and scale the image nicely */
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
         }
 
-        /* The sidebar links */
-        .sidebar a {
-            padding: 8px 8px 8px 32px;
-            text-decoration: none;
-            font-size: 25px;
-            color: #818181;
-            display: block;
-            transition: 0.3s;
-        }
+        /* Style the white division */
+        .white-div {
+            /* 75% height */
+            height: 75%;
 
-        /* When you mouse over the navigation links, change their color */
-        .sidebar a:hover {
-            color: #f1f1f1;
-        }
-
-        /* Position and style the close button (top right corner) */
-        .sidebar .closebtn {
-            position: absolute;
-            top: 0;
-            right: 25px;
-            font-size: 36px;
-            margin-left: 50px;
-        }
-
-        /* Style the button that is used to open the sidebar */
-        .openbtn {
-            font-size: 20px;
-            cursor: pointer;
-            background-color: #111;
-            color: white;
-            padding: 10px 15px;
-            border: none;
-        }
-
-        .openbtn:hover {
-            background-color: #444;
-        }
-
-        /* Style the main content (right column) */
-        .main {
+            /* White background color */
             background-color: white;
+
+            /* Move it 25% down */
+            transform: translateY(25%);
+
+            /* Transition effect */
+            transition: transform 0.5s;
+        }
+
+        /* Style the main content */
+        .main {
+            /* 50% width */
+            width: 50%;
+
+            /* Center the content */
+            margin: 0 auto;
+
+            /* Some padding */
             padding: 20px;
-            margin-left: 25px;
-            /* Same as the width of the sidebar + 5px */
-            transition: margin-left .5s;
-            /* If you change the sidebar width, change this value too */
         }
 
         /* Style the footer */
@@ -97,29 +62,25 @@
             padding: 10px;
             text-align: center;
         }
+
+        /* When the user scrolls down, move the white division up */
+        .white-div.scrolled {
+            transform: translateY(0);
+        }
     </style>
 </head>
 
 <body>
 
-    <div id="mySidebar" class="sidebar">
-        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">x</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
-    </div>
-
     <div class="header">
         <h1>My Blog</h1>
-        <p>A simple blog layout with an animated sidebar.</p>
+        <p>A simple blog layout with a background image and a scroll effect.</p>
     </div>
 
-    <div class="row">
-        <div class="column">
-            <button class="openbtn" onclick="openNav()">☰ Open Sidebar</button>
-        </div>
-        <div class="column main">
+    <div class="bg-image"></div>
+
+    <div class="white-div" id="white-div">
+        <div class="main">
             <h2>Main Content</h2>
             <p>This is where the main content of the blog goes.</p>
         </div>
@@ -130,17 +91,17 @@
     </div>
 
     <script>
-        /* Set the width of the sidebar to 250px and the left margin of the main content to 250px */
-        function openNav() {
-            document.getElementById("mySidebar").style.width = "250px";
-            document.getElementById("main").style.marginLeft = "250px";
-        }
+        // Get the white division element
+        var whiteDiv = document.getElementById("white-div");
 
-        /* Set the width of the sidebar to 0 and the left margin of the main content to 0 */
-        function closeNav() {
-            document.getElementById("mySidebar").style.width = "0";
-            document.getElementById("main").style.marginLeft = "0";
-        }
+        // When the user scrolls down 20px from the top of the document, add the "scrolled" class to the white division
+        window.onscroll = function () {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                whiteDiv.classList.add("scrolled");
+            } else {
+                whiteDiv.classList.remove("scrolled");
+            }
+        };
     </script>
 
 </body>
